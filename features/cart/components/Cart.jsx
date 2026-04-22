@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "@/features/cart/cartSlice";
 import { useState, useEffect } from "react";
 import "./Cart.css";
+import { calculateTotal } from "@/utils/calculateTotal";
 
 function Cart() {
   const items = useSelector(state => state.cart.items);
@@ -15,10 +16,13 @@ function Cart() {
 
   if (!mounted) return null; // ✅ prevent mismatch
 
-  const total = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  // const total = items.reduce(
+  //   (sum, item) => sum + item.price * item.quantity,
+  //   0
+  // );
+ 
+
+  const total = calculateTotal(items);
 
   return (
     <div className="cart">
